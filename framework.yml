@@ -1,0 +1,18 @@
+pool:
+  vmImage: ubuntu-20.04    
+stages:
+- stage: continuous_integration
+  displayName: Continuous Integration
+  jobs:
+  - job: framework
+    displayName: Framework
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    steps:
+    - script: dotnet --version
+      displayName: Check .NET SDK version
+    - script: dotnet restore
+      displayName: Restore NuGet packages
+    - script: dotnet framework
+      displayName: Framework .NET project
+    - script: dotnet run
+      displayName: Run .NET application
